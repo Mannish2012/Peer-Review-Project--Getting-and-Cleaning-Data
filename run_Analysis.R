@@ -1,7 +1,7 @@
 library(tidyr)
 library(dplyr)
 
-setwd("E:/Coursera/Getting_Cleaning_Data/Final/UCI")   
+
 
 features <- read.csv("features.txt", sep = "", header = FALSE, stringsAsFactors = F)
 #STRUCTURE:
