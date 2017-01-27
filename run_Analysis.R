@@ -26,10 +26,6 @@ testSet <- read.csv("X_test.txt", sep = "", header = FALSE)
 #$ V1  : num  0.257 0.286 0.275 0.27 0.275 ...
 #$ V2  : num  -0.0233 -0.0132 -0.0261 -0.0326 -0.0278 ...
 
-
-## Reading and Merging test, train Movement Sets
-
-
 trainSet <- read.csv("X_train.txt", sep = "", header = FALSE)
 #STRUCTURE:
 #'data.frame':7352 obs. of  561 variables:
@@ -45,6 +41,11 @@ merged_training_test <- rbind(testSet,trainSet) #combination of testSet, trainSe
 #$ V2  : num  -0.0233 -0.0132 -0.0261 -0.0326 -0.0278 ...
 #$ V3  : num  -0.0147 -0.1191 -0.1182 -0.1175 -0.1295 ...
 #$ V4  : num  -0.938 -0.975 -0.994 -0.995 -0.994 ...
+
+
+## Reading and Merging test, train Movement Sets
+
+
 
 testMoves <- read.csv("y_test.txt", sep = "", header = FALSE) #2947 by 1 matrix. Columns 
 #STRUCTURE:
@@ -73,6 +74,8 @@ trainPerson <- read.csv("subject_train.txt", sep = "", header = FALSE)
 #$ V1: int  1 1 1 1 1 1 1 1 1 1 ...
 
 all_Persons <- rbind(testPerson, trainPerson)
+
+
 
 labelled_Movements <- merge(merged_Movement, activity_labels)   
 #STRUCTURE:
