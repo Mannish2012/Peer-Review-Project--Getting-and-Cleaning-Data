@@ -136,7 +136,7 @@ ordered_summ1 <- summ1[order(summ1$Person_Number),]
 
 #OUTPUT
 
-write.table(summ1[order(summ1$Person_Number),] , row.names = TRUE, col.names = TRUE)
+write.table(summ1[order(summ1$Person_Number),] , file = "Clean_And_Tidied.txt", row.names = FALSE)
 
 
 
