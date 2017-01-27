@@ -32,7 +32,15 @@ testSet <- read.csv("X_test.txt", sep = "", header = FALSE)
 
 trainSet <- read.csv("X_train.txt", sep = "", header = FALSE)
 #STRUCTURE:
-#'data.frame':2947 obs. of  561 variables:
+#'data.frame':7352 obs. of  561 variables:
+#$ V1  : num  0.257 0.286 0.275 0.27 0.275 ...
+#$ V2  : num  -0.0233 -0.0132 -0.0261 -0.0326 -0.0278 ...
+#$ V3  : num  -0.0147 -0.1191 -0.1182 -0.1175 -0.1295 ...
+#$ V4  : num  -0.938 -0.975 -0.994 -0.995 -0.994 ...
+
+merged_training_test <- rbind(testSet,trainSet) #combination of testSet, trainSet
+#STRUCTURE:
+#'data.frame':	10299 obs. of  561 variables:
 #$ V1  : num  0.257 0.286 0.275 0.27 0.275 ...
 #$ V2  : num  -0.0233 -0.0132 -0.0261 -0.0326 -0.0278 ...
 #$ V3  : num  -0.0147 -0.1191 -0.1182 -0.1175 -0.1295 ...
@@ -48,13 +56,6 @@ trainMoves <- read.csv("y_train.txt", sep = "", header = FALSE)
 #'data.frame':	7352 obs. of  1 variable:
 #$ V1: int  5 5 5 5 5 5 5 5 5 5 ...
 
-merged_training_test <- rbind(testSet,trainSet) #combination of testSet, trainSet
-#STRUCTURE:
-#'data.frame':	10299 obs. of  561 variables:
-#$ V1  : num  0.257 0.286 0.275 0.27 0.275 ...
-#$ V2  : num  -0.0233 -0.0132 -0.0261 -0.0326 -0.0278 ...
-#$ V3  : num  -0.0147 -0.1191 -0.1182 -0.1175 -0.1295 ...
-#$ V4  : num  -0.938 -0.975 -0.994 -0.995 -0.994 ...
 
 merged_Movement <- rbind(testMoves, trainMoves)
 
@@ -79,7 +80,7 @@ labelled_Movements <- merge(merged_Movement, activity_labels)
 # $ V1: int  1 1 1 1 1 1 1 1 1 1 ...
 #$ V2: Factor w/ 6 levels "LAYING","SITTING",..: 4 4 4 4 4 4 4 4 4 4 ...
 
-old_mat = cbind(labelled_Movements, merged_training_test)
+#old_mat = cbind(labelled_Movements, merged_training_test)
 #STRUCTURE:
 #'data.frame':	10299 obs. of  563 variables:
 #$ V1  : int  1 1 1 1 1 1 1 1 1 1 ...
@@ -132,15 +133,13 @@ names(c2)[2] = "Person_Number"
 
 #Extractng the Means of all the variables for all Persons and all Activities
 summ1 <- summarise_each(group_by(c2, Activity, Person_Number ), funs(mean)) 
-summ1[order(summ1$Person_Number),] %>% tail(n=10)
+ordered_summ1 <- summ1[order(summ1$Person_Number),] 
 
-summ2 <- summarise_each(group_by(c2, Activity), funs(mean))
+
 
 #OUTPUT
-GCD <- write.table(c2, row.names = TRUE)
+
+write.table(summ1[order(summ1$Person_Number),] , row.names = TRUE, col.names = TRUE)
 
 
 
-
-#limited_lab <- c2[1:20, c(1:8)]
-# names(limited_lab)[2] = "Person_Number"
